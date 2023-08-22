@@ -1,0 +1,120 @@
+{
+  "template": [
+    {
+      "sku": "SKU",
+      "slug": "sku",
+      "name": "name",
+      "price": 200,
+      "units": [
+        {
+          "xs": 5,
+          "s": 10,
+          "m": 10,
+          "l": 10,
+          "xl": 5
+        }
+      ],
+      "photos": [
+        {
+          "front": "sku-front.jpg",
+          "back": "sku-back.jpg",
+          "detail": "sku-detail.jpg",
+          "styled": "sku-styled.jpg"
+        }
+      ],
+      "description": "design details",
+      "materials": "materials & care instructions"
+    }
+  ],
+
+  "stocks": [
+    {
+      "sku": "ts-01-23-su",
+      "slug": "ts-01-23-su",
+      "name": "Hand Painted White T-shirt",
+      "price": 200,
+      "units": [
+        {
+          "xs": 5,
+          "s": 10,
+          "m": 10,
+          "l": 10,
+          "xl": 5
+        }
+      ],
+      "photos": [
+        "ts-01-23-su-front.jpeg",
+        "ts-01-23-su-back.jpeg",
+        "ts-01-23-su-detail.jpeg",
+        "ts-01-23-su-styled.jpeg"
+      ],
+      "description": "Heavyweight cotton jersey T-shirt with hand painting. Wear and tear throughout.",
+      "materials": "100% cotton Wash at 30° C - Delicate cycle"
+    },
+    {
+      "sku": "ts-02-23-su",
+      "slug": "ts-02-23-su",
+      "name": "Hand Painted Black T-shirt",
+      "price": 200,
+      "units": [
+        {
+          "xs": 5,
+          "s": 10,
+          "m": 10,
+          "l": 10,
+          "xl": 5
+        }
+      ],
+      "photos": [
+        "ts-02-23-su-front.jpeg",
+        "ts-02-23-su-back.jpeg",
+        "ts-02-23-su-detail.jpeg",
+        "ts-02-23-su-styled.jpeg"
+      ],
+      "description": "Heavyweight cotton jersey T-shirt with hand painting. Wear and tear throughout.",
+      "materials": "100% cotton Wash at 30° C - Delicate cycle"
+    },
+    {
+      "sku": "je-01-23-su",
+      "slug": "je-01-23-su",
+      "name": "Regular Jeans",
+      "price": 400,
+      "units": [
+        {
+          "30": 10,
+          "32": 10,
+          "34": 10
+        }
+      ],
+      "photos": [
+        "je-01-23-su-front.jpeg",
+        "je-01-23-su-back.jpeg",
+        "je-01-23-su-detail.jpeg",
+        "je-01-23-su-styled.jpeg"
+      ],
+      "description": "Regular fit jeans, light blue wash. Finished with a button fly.",
+      "materials": "100% cotton Wash at 30° C - Delicate cycle"
+    },
+    {
+      "sku": "je-02-23-su",
+      "slug": "je-02-23-su",
+      "name": "Two-Tuck Jeans",
+      "price": 450,
+      "units": [
+        {
+          "30": 10,
+          "32": 10,
+          "34": 10
+        }
+      ],
+      "photos": [
+        "je-02-23-su-front.jpeg",
+        "je-02-23-su-back.jpeg",
+        "je-02-23-su-detail.jpeg",
+        "je-02-23-su-styled.jpeg"
+      ],
+      "description": "Wide fit jeans, two-tuck at the front, light blue wash. Finished with a button fly.",
+      "materials": "100% cotton Wash at 30° C - Delicate cycle"
+    }
+  ]
+}
