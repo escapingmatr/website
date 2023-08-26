@@ -15,7 +15,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth'; // Import the auth store module
 import { auth } from '@/firebase/init'; // Import the initialized auth module
-import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged function
+import { onAuthStateChanged, signOut } from 'firebase/auth'; // Import onAuthStateChanged function
 
 const router = useRouter();
 const isLoggedIn = ref(false);
