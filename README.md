@@ -9,4 +9,5 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 Photos should be saved under /public/images with the order of front, back, detail, styled.
 
 npm install
+
 npm run dev
