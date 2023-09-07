@@ -1,9 +1,15 @@
 <template>
   <div class="photo-carousel">
-    <button @click="prevPhoto">&lt;</button>
-    <!--photos should be saved under /public/images-->
-    <img :src="`/images/${currentPhoto}`" alt="Carousel Photo" />
-    <button @click="nextPhoto">&gt;</button>
+    <div class="carousel-inner">
+      <button class="carousel-control left" @click="prevPhoto">&lt;</button>
+      <!--photos should be saved under /public/images-->
+      <img
+        class="photo"
+        :src="`/images/${currentPhoto}`"
+        alt="Carousel Photo"
+      />
+      <button class="carousel-control left" @click="nextPhoto">&gt;</button>
+    </div>
   </div>
 </template>
 
@@ -34,18 +40,26 @@ export default {
 ***REMOVED***
 </script>
 
-<style>
+<style lang="scss" scoped>
 /* Add your styles here */
 .photo-carousel {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 600px;
   margin: 0 auto;
+}
+.carousel-inner {
+  position: relative;
+}
+.photo {
+  /* adjust the size of the photo */
+  width: 50%;
+  height: auto;
 }
 .button {
   position: absolute;
+  display: inline-block;
   top: 0;
 }
 </style>
