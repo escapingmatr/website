@@ -44,4 +44,8 @@ export default {
   max-width: 600px;
   margin: 0 auto;
 }
+.button {
+  position: absolute;
+  top: 0;
+}
 </style>
