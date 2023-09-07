@@ -92,7 +92,7 @@ export default {
 ***REMOVED***
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .product {
   display: flex;
   padding: 20px;
@@ -100,6 +100,7 @@ export default {
 
 .product-carousel {
   /* Your carousel styles */
+  width: 80%;
 }
 
 /* Other existing styles */
