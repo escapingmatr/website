@@ -1,10 +1,18 @@
 <template>
-  <h1>Sign In to an Account</h1>
-  <p><input type="text" placeholder="Email" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p v-if="errMsg">{{ errMsg }}</p>
-  <p><button @click="register">Submit</button></p>
-  <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+  <div class="login">
+    <h1>Log into your account</h1>
+    <p><input type="text" placeholder="Email" v-model="email" /></p>
+    <p><input type="password" placeholder="Password" v-model="password" /></p>
+    <p v-if="errMsg">{{ errMsg }}</p>
+    <div class="buttons">
+      <div class="submit">
+        <p><button @click="register">Submit</button></p>
+      </div>
+      <div class="google">
+        <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -58,3 +66,23 @@ const signInWithGoogle = () => {
     .catch((error) => {});
 ***REMOVED***
 </script>
+
+<style lang="scss" scoped>
+.login {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+
+  .buttons {
+    /* Add any button-related styling here */
+    display: flex;
+    .submit {
+      margin: 5px;
+    }
+    .google {
+      margin: 5px;
+    }
+  }
+}
+</style>

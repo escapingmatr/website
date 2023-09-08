@@ -46,9 +46,9 @@ export default {
 /* Add your styles here */
 .photo-carousel {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 60vw;
   margin: 0 auto;
 }
 .carousel-inner {
@@ -56,8 +56,8 @@ export default {
 }
 .photo {
   /* adjusted to fit */
-  width: 100%;
-  height: auto;
+  height: 80vh;
+  width: auto;
 }
 .carousel-control {
   position: absolute;
@@ -65,6 +65,14 @@ export default {
   height: 50px;
   width: 30px;
   top: calc(50% - 40px);
+  background-color: rgba(0, 0, 0, 0.3); /* Add a background color */
+  cursor: pointer; /* Add a pointer cursor for better UX */
+  border: none; /* Remove the border */
+  outline: none; /* Remove the outline */
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Change color on hover */
+  }
   &.left {
     left: 0;
   }
