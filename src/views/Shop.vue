@@ -1,11 +1,20 @@
 <template>
   <div class="shop">
-    <h1>Shop</h1>
+    <div class="page-title">
+      <h1>Shop</h1>
+    </div>
     <div class="stocks">
-      <div v-for="stock in stocks" :key="stock.sku">
+      <div class="stock" v-for="stock in stocks" :key="stock.sku">
         <router-link :to="'/shop/' + stock.sku">
-          <h2>{{ stock.name }}</h2>
-          <img :src="`/images/${stock.photos[2]}`" :alt="stock.name" />
+          <div class="stock-photo">
+            <img :src="`/images/${stock.photos[2]}`" :alt="stock.name" />
+          </div>
+          <div class="stock-name">
+            <h5>{{ stock.name }}</h5>
+          </div>
+          <div class="stock-price">
+            <h4>${{ stock.price }}</h4>
+          </div>
         </router-link>
       </div>
     </div>
@@ -22,3 +31,37 @@ export default {
   },
 ***REMOVED***
 </script>
+
+<style lang="scss" scoped>
+.shop {
+  /* Add any other styling for the shop page */
+}
+
+.stocks {
+  display: flex;
+  flex-wrap: wrap; /* Allow stocks to wrap to the next line */
+  gap: 20px; /* Adjust the gap as needed between stocks */
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+}
+
+.stock {
+  flex: 1; /* Make each stock equally distribute the available space */
+  max-width: 25%;
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+/* Add any other styling for the individual stocks */
+.stock-name {
+  /* Style for stock name */
+}
+
+.stock-photo {
+  /* Style for stock photo */
+  text-align: center; /* Center the image horizontally */
+}
+
+img {
+  max-width: 100%; /* Ensure images don't exceed their container width */
+}
+</style>

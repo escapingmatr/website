@@ -5,36 +5,32 @@
         <div class="link-wrapper">
           <router-link to="/shop">Shop</router-link>
         </div>
-        <div class="link-wrapper">
-          TEST 1
-        </div>
-        <div class="link-wrapper">
-          TEST 2
-        </div>
+        <div class="link-wrapper">Search</div>
       </div>
       <div class="link-container center">
         <div class="link-wrapper">
-          <router-link
-            class="home-logo"
-            to="/"
-          >
-            HOME
-          </router-link>
+          <router-link class="home-logo" to="/"> HOME </router-link>
         </div>
       </div>
       <div class="link-container right">
         <div class="link-wrapper">
-          <router-link
-            :to="'/login'"
-          >
+          <router-link :to="'/login'">
             {{ 'Login' }}
           </router-link>
         </div>
         <div class="link-wrapper">
-          TEST 1
+          <div class="link-wrapper">
+            <router-link :to="'/wishlist'">
+              {{ 'Wishlist' }}
+            </router-link>
+          </div>
         </div>
         <div class="link-wrapper">
-          TEST 2
+          <div class="link-wrapper">
+            <router-link :to="'/cart'">
+              {{ 'Cart' }}
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -56,7 +52,7 @@
 ***REMOVED*** useAuthStore } from '@/store/auth'; // Import the auth store module
 ***REMOVED*** auth } from '@/firebase/init'; // Import the initialized auth module
 ***REMOVED*** onAuthStateChanged, signOut ***REMOVED*** // Import onAuthStateChanged function
-***REMOVED*** reactive, computed } from 'vue'
+***REMOVED*** reactive, computed } from 'vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -112,7 +108,7 @@ const authStore = useAuthStore();
       justify-content: flex-start;
 
       .link-wrapper {
-        margin-right: 10px;
+        margin-right: 20px;
       }
     }
 
@@ -139,5 +135,4 @@ const authStore = useAuthStore();
     }
   }
 }
-
 </style>
