@@ -115,6 +115,27 @@
       ],
       "description": "Wide fit jeans, two-tuck at the front, light blue wash. Finished with a button fly.",
       "materials": "100% cotton Wash at 30° C - Delicate cycle"
+    },
+    {
+      "sku": "je-02-23-su",
+      "slug": "je-02-23-su",
+      "name": "Two-Tuck Jeans",
+      "price": 450,
+      "units": [
+        {
+          "30": 10,
+          "32": 10,
+          "34": 10
+        }
+      ],
+      "photos": [
+        "je-02-23-su-front.jpeg",
+        "je-02-23-su-back.jpeg",
+        "je-02-23-su-detail.jpeg",
+        "je-02-23-su-styled.jpeg"
+      ],
+      "description": "Wide fit jeans, two-tuck at the front, light blue wash. Finished with a button fly.",
+      "materials": "100% cotton Wash at 30° C - Delicate cycle"
     }
   ]
 }

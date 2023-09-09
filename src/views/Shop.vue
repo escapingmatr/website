@@ -40,14 +40,13 @@ export default {
 .stocks {
   display: flex;
   flex-wrap: wrap; /* Allow stocks to wrap to the next line */
-  gap: 20px; /* Adjust the gap as needed between stocks */
+  gap: 0.5%; /* Adjust the gap as needed between stocks */
   padding-left: 0.5%;
   padding-right: 0.5%;
 }
 
 .stock {
-  flex: 1; /* Make each stock equally distribute the available space */
-  max-width: 25%;
+  flex: 0 0 calc(24.62554%); /* Four items per row with a gap between */
   box-sizing: border-box; /* Include padding and border in the width calculation */
 }
 
