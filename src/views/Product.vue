@@ -39,7 +39,7 @@
 <script>
 ***REMOVED*** computed } from 'vue'; // Import the computed function
 import sourceData from '@/data.json';
-import PhotoCarousel from '@/components/widgets/PhotoCarousel.vue';
+import PhotoCarousel from '@/components/widgets/PhotoCarousel/PhotoCarousel.vue';
 ***REMOVED*** useStore } from '@/store/composition';
 
 export default {
