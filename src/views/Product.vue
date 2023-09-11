@@ -4,9 +4,13 @@
       <!-- Carousel and navigation buttons here -->
       <photo-carousel :photos="product.photos" />
     </div>
-    <div class="product-details">
-      <h1>{{ product.name }}</h1>
-      <p class="price">Price: ${{ product.price }}</p>
+    <div class="text-info">
+      <div class="product-name">
+        <h1>{{ product.name }}</h1>
+      </div>
+      <div class="price-box">
+        <p class="price">Price: ${{ product.price }}</p>
+      </div>
       <div class="unit-buttons">
         <button
           v-for="(unitValue, unitSize) in product.units[0]"
@@ -18,8 +22,6 @@
           {{ unitSize }}
         </button>
       </div>
-      <p>{{ product.description }}</p>
-      <p>Materials: {{ product.materials }}</p>
       <div class="actions">
         <button class="add-to-bag" @click="addToBag(product)">
           Add to Bag
@@ -28,6 +30,8 @@
           Add to Wishlist
         </button>
       </div>
+      <p>{{ product.description }}</p>
+      <p>Materials: {{ product.materials }}</p>
     </div>
   </div>
 </template>

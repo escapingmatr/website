@@ -9,11 +9,13 @@
           <div class="stock-photo">
             <img :src="`/images/${stock.photos[2]}`" :alt="stock.name" />
           </div>
-          <div class="stock-name">
-            <h5>{{ stock.name }}</h5>
-          </div>
-          <div class="stock-price">
-            <h4>${{ stock.price }}</h4>
+          <div class="text-info">
+            <div class="stock-name">
+              <h5>{{ stock.name }}</h5>
+            </div>
+            <div class="stock-price">
+              <h4>${{ stock.price }}</h4>
+            </div>
           </div>
         </router-link>
       </div>
@@ -35,6 +37,9 @@ export default {
 <style lang="scss" scoped>
 .shop {
   /* Add any other styling for the shop page */
+  .page-title {
+    text-align: center;
+  }
 }
 
 .stocks {
@@ -43,11 +48,14 @@ export default {
   gap: 0.5%; /* Adjust the gap as needed between stocks */
   padding-left: 0.5%;
   padding-right: 0.5%;
-}
-
-.stock {
-  flex: 0 0 calc(24.62554%); /* Four items per row with a gap between */
-  box-sizing: border-box; /* Include padding and border in the width calculation */
+  .stock {
+    flex: 0 0 calc(24.62554%); /* Four items per row with a gap between */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+  }
+  .text-info {
+    position: relative;
+    padding: 5px 2.4px 2.8px;
+  }
 }
 
 /* Add any other styling for the individual stocks */
