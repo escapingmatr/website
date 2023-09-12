@@ -5,7 +5,9 @@
         <div class="link-wrapper">
           <router-link to="/shop">Shop</router-link>
         </div>
-        <div class="link-wrapper">Search</div>
+        <div class="link-wrapper">
+          <a @click="toggleSearchBar">Search</a>
+        </div>
       </div>
       <div class="link-container center">
         <div class="link-wrapper">
@@ -35,6 +37,7 @@
       </div>
     </div>
   </div>
+  <SearchBar v-if="isSearchBarVisible" />
   <!-- <router-link to="/shop">Shop</router-link>
         <div>
         <router-link to="/">Home</router-link>
@@ -53,9 +56,17 @@
 ***REMOVED*** auth } from '@/firebase/init'; // Import the initialized auth module
 ***REMOVED*** onAuthStateChanged, signOut ***REMOVED*** // Import onAuthStateChanged function
 ***REMOVED*** reactive, computed } from 'vue';
+import SearchBar from '@/components/widgets/SearchBar/SearchBar.vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
+// Use ref to create a reactive variable
+const isSearchBarVisible = ref(false);
+
+// Method to toggle search bar visibility
+const toggleSearchBar = () => {
+  isSearchBarVisible.value = !isSearchBarVisible.value;
+***REMOVED***
 
 // const isLoggedIn = ref(false);
 
