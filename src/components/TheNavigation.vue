@@ -60,13 +60,6 @@ import SearchBar from '@/components/widgets/SearchBar/SearchBar.vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
-// Use ref to create a reactive variable
-const isSearchBarVisible = ref(false);
-
-// Method to toggle search bar visibility
-const toggleSearchBar = () => {
-  isSearchBarVisible.value = !isSearchBarVisible.value;
-***REMOVED***
 
 // const isLoggedIn = ref(false);
 
