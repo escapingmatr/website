@@ -48,7 +48,7 @@ export default {
   .stock {
     flex: 0 0 calc(25%); /* Four items per row with a gap between */
     box-sizing: border-box; /* Include padding and border in the width calculation */
-    padding: 0.7%;
+    padding: 0%;
   }
   .text-info {
     position: relative;
