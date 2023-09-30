@@ -45,12 +45,10 @@ export default {
 .stocks {
   display: flex;
   flex-wrap: wrap; /* Allow stocks to wrap to the next line */
-  gap: 0.5%; /* Adjust the gap as needed between stocks */
-  padding-left: 0.5%;
-  padding-right: 0.5%;
   .stock {
-    flex: 0 0 calc(24.62554%); /* Four items per row with a gap between */
+    flex: 0 0 calc(25%); /* Four items per row with a gap between */
     box-sizing: border-box; /* Include padding and border in the width calculation */
+    padding: 0.7%;
   }
   .text-info {
     position: relative;

@@ -1,29 +1,31 @@
 <template>
   <div>
-    <teleport to="header">
-      <div class="modal" v-if="isOpen">
+    <teleport to="body">
+      <div class="modal" v-if="isOpenProp">
         <div class="searchbar">
           <p>searchbar</p>
-          <button @click="isOpen = false">close</button>
+          <button @click="closeSearchBar">close</button>
         </div>
       </div>
     </teleport>
   </div>
 </template>
 
-<script>
-***REMOVED*** ref } from 'vue';
+<script setup>
+***REMOVED*** defineProps } from 'vue';
 
-export default {
-  props: {
-    isOpen: Boolean,
-  },
+// Declare the prop 'isOpen'
+const { isOpen } = defineProps(['isOpen']);
+
+// Method to close the search bar
+const closeSearchBar = () => {
+  isOpen.value = false;
 ***REMOVED***
 </script>
 
 <style lang="scss" scoped>
 .modal {
-  position: isAbsolute;
+  position: absolute; /* Fix the position value */
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.1);

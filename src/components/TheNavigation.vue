@@ -6,7 +6,7 @@
           <router-link to="/shop">Shop</router-link>
         </div>
         <div class="link-wrapper">
-          <a @click="toggleSearchBar">Search</a>
+          <a @click="showSearchBar">Search</a>
         </div>
       </div>
       <div class="link-container center">
@@ -37,7 +37,6 @@
       </div>
     </div>
   </div>
-  <SearchBar v-if="isSearchBarVisible" />
   <!-- <router-link to="/shop">Shop</router-link>
         <div>
         <router-link to="/">Home</router-link>
@@ -49,7 +48,7 @@
         <router-link to="/cart">Cart</router-link> -->
 </template>
 
-<script setup>
+<script>
 ***REMOVED*** onMounted, ref } from 'vue';
 ***REMOVED*** useRouter } from 'vue-router';
 ***REMOVED*** useAuthStore } from '@/store/auth'; // Import the auth store module
@@ -58,8 +57,25 @@
 ***REMOVED*** reactive, computed } from 'vue';
 import SearchBar from '@/components/widgets/SearchBar/SearchBar.vue';
 
-const router = useRouter();
-const authStore = useAuthStore();
+export default {
+  components: {
+    SearchBar,
+  },
+  setup() {
+    // router
+    const router = useRouter();
+    const authStore = useAuthStore();
+
+    // SearchBar Modal
+    const modalActive = ref(false);
+
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    ***REMOVED***
+
+    return { router, authStore, modalActive, toggleModal ***REMOVED***
+  },
+***REMOVED***
 
 // const isLoggedIn = ref(false);
 
