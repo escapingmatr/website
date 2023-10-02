@@ -22,6 +22,14 @@ export const useAuthStore = defineStore('auth', {
         return false; // Sign-in failed
       }
     },
+    async signInWithGoogle() {
+      const provider = new auth.GoogleAuthProvider();
+      try {
+        const userCredential = auth.signInWithPopup(auth.getAuth(), provider);
+        this.user = userCredential.user;
+        return true;
+      } catch (error) {}
+    },
     async signOut() {
       await auth.signOut();
       this.user = null;
