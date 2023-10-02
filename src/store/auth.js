@@ -18,7 +18,20 @@ export const useAuthStore = defineStore('auth', {
         this.user = userCredential.user;
         return true; // Sign-in successful
       } catch (error) {
-        console.error(error.message);
+        switch (error.code) {
+          case 'auth/invalid-email':
+            errMsg.value = 'Invalid email';
+            break;
+          case 'auth/user-not-found':
+            errMsg.value = 'No account with that email was found';
+            break;
+          case 'auth/wrong-password':
+            errMsg.value = 'Incorrect password';
+            break;
+          default:
+            errMsg.value = 'Email or password was incorrect';
+            break;
+        }
         return false; // Sign-in failed
       }
     },
@@ -28,7 +41,9 @@ export const useAuthStore = defineStore('auth', {
         const userCredential = auth.signInWithPopup(auth.getAuth(), provider);
         this.user = userCredential.user;
         return true;
-      } catch (error) {}
+      } catch (error) {
+        return false;
+      }
     },
     async signOut() {
       await auth.signOut();
