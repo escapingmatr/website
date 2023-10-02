@@ -1,14 +1,29 @@
 ***REMOVED*** defineStore } from 'pinia';
+***REMOVED*** auth } from '@/firebase/init';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null, // Initialize user as null
+    user: null,
   }),
+  getters: {
+    isAuthenticated: (state) => !!state.user,
+  },
   actions: {
-    setUser(user) {
-      this.user = user;
+    async signInWithEmailAndPassword(email, password) {
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(
+          email,
+          password
+        );
+        this.user = userCredential.user;
+        return true; // Sign-in successful
+      } catch (error) {
+        console.error(error.message);
+        return false; // Sign-in failed
+      }
     },
-    clearUser() {
+    async signOut() {
+      await auth.signOut();
       this.user = null;
     },
   },
