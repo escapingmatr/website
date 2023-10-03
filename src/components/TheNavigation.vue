@@ -16,8 +16,8 @@
       </div>
       <div class="link-container right">
         <div class="link-wrapper">
-          <router-link :to="'/login'">
-            {{ 'Login' }}
+          <router-link :to="authStore.isAuthenticated ? '/profile' : '/login'">
+            {{ authStore.isAuthenticated ? 'Profile' : 'Login' }}
           </router-link>
         </div>
         <div class="link-wrapper">
@@ -56,10 +56,12 @@
 ***REMOVED*** onAuthStateChanged, signOut ***REMOVED*** // Import onAuthStateChanged function
 ***REMOVED*** reactive, computed } from 'vue';
 import SearchBar from '@/components/widgets/SearchBar/SearchBar.vue';
+import HoeverableDropdown from '@/components/widgets/HoverableDropdown/HoverableDropdown.vue';
 
 export default {
   components: {
     SearchBar,
+    HoeverableDropdown,
   },
   setup() {
     // router

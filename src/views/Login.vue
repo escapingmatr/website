@@ -6,10 +6,14 @@
     <p v-if="errMsg">{{ errMsg }}</p>
     <div class="buttons">
       <div class="submit">
-        <p><button @click="register">Submit</button></p>
+        <p>
+          <button @click="signInWithEmailAndPassword">Submit</button>
+        </p>
       </div>
       <div class="google">
-        <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+        <p>
+          <button @click="signInWithGoogle">Sign In With Google</button>
+        </p>
       </div>
     </div>
   </div>
@@ -17,53 +21,32 @@
 
 <script setup>
 ***REMOVED*** ref } from 'vue';
-***REMOVED***
-***REMOVED***
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-***REMOVED***
 ***REMOVED*** useRouter } from 'vue-router';
+***REMOVED*** useAuthStore } from '@/store/auth';
 
 const email = ref('');
 const password = ref('');
-const auth = getAuth();
-const errMsg = ref();
+const errMsg = ref('');
 const router = useRouter();
+const authStore = useAuthStore();
 
-const register = () => {
-  signInWithEmailAndPassword(auth, email.value, password.value)
-    .then((data) => {
-      console.log('Successfully signed in!');
-      console.log(auth.currentUser);
-      router.push('/');
-    })
-    .catch((error) => {
-      console.log(error.code);
-      switch (error.code) {
-        case 'auth/invalid-email':
-          errMsg.value = 'Invalid email';
-          break;
-        case 'auth/user-not-found':
-          errMsg.value = 'No account with that email was found';
-          break;
-        case 'auth/wrong-password':
-          errMsg.value = 'Incorrect password';
-          break;
-        default:
-          errMsg.value = 'Email or password was incorrect';
-          break;
-      }
-    });
+const signInWithEmailAndPassword = async () => {
+  const success = await authStore.signInWithEmailAndPassword(
+    email.value,
+    password.value
+  );
+  if (success) {
+    // Redirect or perform any other actions on successful login
+    router.push('/'); // Example: Redirect to a dashboard page
+  }
 ***REMOVED***
-const signInWithGoogle = () => {
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(getAuth(), provider)
-    .then((result) => {
-      console.log(result.user);
-      router.push('/');
-    })
-    .catch((error) => {});
+
+const signInWithGoogle = async () => {
+  const success = await authStore.signInWithGoogle();
+  if (success) {
+    // Redirect or perform any other actions on successful login
+    router.push('/'); // Example: Redirect to a dashboard page
+  }
 ***REMOVED***
 </script>
 
