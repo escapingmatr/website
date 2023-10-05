@@ -16,9 +16,27 @@
       </div>
       <div class="link-container right">
         <div class="link-wrapper">
-          <router-link :to="authStore.isAuthenticated ? '/profile' : '/login'">
-            {{ authStore.isAuthenticated ? 'Profile' : 'Login' }}
-          </router-link>
+          <!-- Apply PopoverHoverLink to the "Profile" link -->
+          <div class="popover-hover-wrapper" v-if="authStore.isAuthenticated">
+            <PopoverHoverLink>
+              <router-link :to="'/profile'">Profile</router-link>
+              <!-- Popover content slot -->
+              <template #popover-content>
+                <div class="popover-list">
+                  <router-link :to="'/history'"
+                    >Purchase History{{ '\n' }}</router-link
+                  >
+                  <router-link :to="'/email'"
+                    >Email Preference{{ '\n' }}</router-link
+                  >
+                  <a @click="logout">Logout</a>
+                </div>
+              </template>
+            </PopoverHoverLink>
+          </div>
+          <div class="login-wrapper" v-if="!authStore.isAuthenticated">
+            <router-link to="/login"> Login </router-link>
+          </div>
         </div>
         <div class="link-wrapper">
           <div class="link-wrapper">
@@ -37,31 +55,19 @@
       </div>
     </div>
   </div>
-  <!-- <router-link to="/shop">Shop</router-link>
-        <div>
-        <router-link to="/">Home</router-link>
-        </div>
-        <router-link :to="isLoggedIn ? '/profile' : '/login'">{{
-        isLoggedIn ? 'Profile' : 'Login'
-        }}</router-link>
-        <button @click="handleSignOut" v-if="isLoggedIn">Sign Out</button>
-        <router-link to="/cart">Cart</router-link> -->
 </template>
 
 <script>
-***REMOVED*** onMounted, ref } from 'vue';
+***REMOVED*** ref } from 'vue';
 ***REMOVED*** useRouter } from 'vue-router';
 ***REMOVED*** useAuthStore } from '@/store/auth'; // Import the auth store module
-***REMOVED*** auth } from '@/firebase/init'; // Import the initialized auth module
-***REMOVED*** onAuthStateChanged, signOut ***REMOVED*** // Import onAuthStateChanged function
-***REMOVED*** reactive, computed } from 'vue';
 import SearchBar from '@/components/widgets/SearchBar/SearchBar.vue';
-import HoeverableDropdown from '@/components/widgets/HoverableDropdown/HoverableDropdown.vue';
+import PopoverHoverLink from '@/components/widgets/Popover/ProfilePopover.vue'; // Import the PopoverHoverLink component
 
 export default {
   components: {
     SearchBar,
-    HoeverableDropdown,
+    PopoverHoverLink, // Register the PopoverHoverLink component
   },
   setup() {
     // router
@@ -75,29 +81,20 @@ export default {
       modalActive.value = !modalActive.value;
     ***REMOVED***
 
-    return { router, authStore, modalActive, toggleModal ***REMOVED***
+    const logout = () => {
+      authStore.signOut();
+      router.push('/');
+    ***REMOVED***
+
+    return {
+      router,
+      authStore,
+      modalActive,
+      toggleModal,
+      logout,
+    ***REMOVED***
   },
 ***REMOVED***
-
-// const isLoggedIn = ref(false);
-
-// onMounted(() => {
-//   onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//       isLoggedIn.value = true;
-//       authStore.setUser(user); // Set the user in the store if logged in
-//     } else {
-//       isLoggedIn.value = false;
-//       authStore.clearUser(); // Clear user in the store if logged out
-//     }
-//   });
-// });
-
-// const handleSignOut = () => {
-//   signOut(auth).then(() => {
-//     router.push('/');
-//   });
-// ***REMOVED***
 </script>
 
 <style lang="scss" scoped>
@@ -155,6 +152,12 @@ export default {
         font-size: 40px;
       }
     }
+  }
+
+  .popover-list {
+    color: black;
+    width: 130px;
+    text-align: center;
   }
 }
 </style>

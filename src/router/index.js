@@ -10,6 +10,8 @@ import Signup from '@/views/Signup.vue';
 import Login from '@/views/Login.vue';
 import Profile from '@/views/Profile.vue';
 import Product from '@/views/Product.vue';
+import Email from '@/views/Email.vue';
+import History from '@/views/History.vue';
 
 const routes = [
   {
@@ -20,7 +22,7 @@ const routes = [
       {
         path: '',
         name: 'Home',
-        component: Home
+        component: Home,
       },
       { path: '/about', name: 'About', component: About },
       { path: '/contact', name: 'Contact', component: Contact },
@@ -30,8 +32,15 @@ const routes = [
       { path: '/signup', name: 'Signup', component: Signup },
       { path: '/login', name: 'Login', component: Login },
       { path: '/profile', name: 'Profile', component: Profile },
-      { path: '/shop/:stocksku', name: 'product', component: Product, props: true },
-    ]
+      {
+        path: '/shop/:stocksku',
+        name: 'product',
+        component: Product,
+        props: true,
+      },
+      { path: '/email', name: 'Email Preference', component: Email },
+      { path: '/history', name: 'Purchase History', component: History },
+    ],
   },
 ];
 
