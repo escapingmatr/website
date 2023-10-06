@@ -11,11 +11,9 @@
           </div>
           <div class="text-info">
             <div class="stock-name">
-              <h5>{{ stock.name }}</h5>
+              {{ stock.name }}
             </div>
-            <div class="stock-price">
-              <h4>${{ stock.price }}</h4>
-            </div>
+            <div class="stock-price">${{ stock.price }}</div>
           </div>
         </router-link>
       </div>
@@ -49,16 +47,21 @@ export default {
     flex: 0 0 calc(25%); /* Four items per row with a gap between */
     box-sizing: border-box; /* Include padding and border in the width calculation */
     padding: 0%;
+    margin-bottom: 1.5%;
   }
   .text-info {
     position: relative;
     padding: 5px 2.4px 2.8px;
+    .stock-name {
+      /* Style for stock name */
+      font-size: 13.5px;
+      font-weight: 550;
+    }
+    .stock-price {
+      font-size: 13.5px;
+      font-weight: 550;
+    }
   }
-}
-
-/* Add any other styling for the individual stocks */
-.stock-name {
-  /* Style for stock name */
 }
 
 .stock-photo {
