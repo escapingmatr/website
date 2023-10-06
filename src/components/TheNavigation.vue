@@ -12,7 +12,7 @@
       </div>
       <div class="link-container center">
         <div class="link-wrapper">
-          <router-link class="home-logo" to="/"> HOME </router-link>
+          <router-link class="home-logo" to="/"> INTENTIONS </router-link>
         </div>
       </div>
       <div class="link-container right">
@@ -121,7 +121,7 @@ export default {
   align-items: center;
 
   width: 100%;
-  height: 90px;
+  height: 55px;
   padding: 0 30px;
 
   position: fixed;
@@ -165,7 +165,7 @@ export default {
 
     .link-wrapper {
       .home-logo {
-        font-size: 40px;
+        font-size: 20px;
       }
     }
   }
