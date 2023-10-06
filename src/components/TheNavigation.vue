@@ -6,7 +6,8 @@
           <router-link to="/shop">Shop</router-link>
         </div>
         <div class="link-wrapper">
-          <a @click="showSearchBar">Search</a>
+          <a @click="toggleSearchBar">Search</a>
+          <hidden-tablet-landscape ref="hiddenTabletLandscape" />
         </div>
       </div>
       <div class="link-container center">
@@ -60,14 +61,29 @@
 <script>
 ***REMOVED*** ref } from 'vue';
 ***REMOVED*** useRouter } from 'vue-router';
-***REMOVED*** useAuthStore } from '@/store/auth'; // Import the auth store module
-import SearchBar from '@/components/widgets/SearchBar/SearchBar.vue';
-import PopoverHoverLink from '@/components/widgets/Popover/ProfilePopover.vue'; // Import the PopoverHoverLink component
+***REMOVED*** useAuthStore } from '@/store/auth';
+import HiddenTabletLandscape from '@/components/widgets/SearchBar/HiddenTabletLandscape.vue';
+import PopoverHoverLink from '@/components/widgets/Popover/ProfilePopover.vue';
 
 export default {
   components: {
-    SearchBar,
+    HiddenTabletLandscape,
     PopoverHoverLink, // Register the PopoverHoverLink component
+  },
+  methods: {
+    toggleSearchBar() {
+      // Toggle the visibility of the search box when the "Search" link is clicked
+      this.$refs.hiddenTabletLandscape.isSearchVisible =
+        !this.$refs.hiddenTabletLandscape.isSearchVisible;
+      console.log(
+        'isSearchVisible:',
+        this.$refs.hiddenTabletLandscape.isSearchVisible //testing
+      );
+      console.log(
+        'isTabletLandscape:',
+        this.$refs.hiddenTabletLandscape.isTabletLandscape //testing
+      );
+    },
   },
   setup() {
     // router
