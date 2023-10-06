@@ -64,5 +64,8 @@ export default {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 100;
+  /* Center the popover horizontally */
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
