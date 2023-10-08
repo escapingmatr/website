@@ -4,6 +4,7 @@
     <div class="searchbar-content">
       <SearchBar />
     </div>
+    <div class="close" @click="isSearchVisible = false">close</div>
   </div>
 </template>
 
@@ -41,6 +42,10 @@ export default {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   padding: 18px;
+  .close {
+    margin-left: 18px;
+    cursor: pointer;
+  }
 }
 
 .searchbar-content {
