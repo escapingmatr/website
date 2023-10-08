@@ -1,10 +1,9 @@
 <template>
-  <div
-    class="tablet-landscape-search"
-    v-if="isTabletLandscape && isSearchVisible"
-  >
+  <div class="tablet-landscape-search" v-if="isSearchVisible">
     <!-- Your search box content goes here -->
-    <SearchBar />
+    <div class="searchbar-content">
+      <SearchBar />
+    </div>
   </div>
 </template>
 
@@ -20,41 +19,32 @@ export default {
   setup() {
     const authStore = useAuthStore();
 
-    const isTabletLandscape = ref(false);
     const isSearchVisible = ref(false);
 
-    const checkTabletLandscape = () => {
-      isTabletLandscape.value =
-        window.innerWidth >= 1024 && window.innerWidth <= 1279;
-    ***REMOVED***
-
-    onMounted(() => {
-      checkTabletLandscape();
-      window.addEventListener('resize', checkTabletLandscape);
-    });
-
-    onBeforeUnmount(() => {
-      window.removeEventListener('resize', checkTabletLandscape);
-    });
-
     return {
-      isTabletLandscape,
       isSearchVisible,
     ***REMOVED***
   },
 ***REMOVED***
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 /* Add your CSS styles for the tablet landscape search box here */
 .tablet-landscape-search {
   position: absolute;
-  /* top: 0;
-  right: 0; */
-  /* left: 0; */
-  width: 100%;
-  height: 100%;
+  left: 30px; /* same as the left indent on the navbar */
+  width: 450px;
+  height: 90px;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 101; /* Ensure it appears above other content */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 18px;
+}
+
+.searchbar-content {
+  /* Add any additional styling for the search bar content */
+  width: 100%;
 }
 </style>
