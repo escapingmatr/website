@@ -75,14 +75,6 @@ export default {
       // Toggle the visibility of the search box when the "Search" link is clicked
       this.$refs.hiddenTabletLandscape.isSearchVisible =
         !this.$refs.hiddenTabletLandscape.isSearchVisible;
-      console.log(
-        'isSearchVisible:',
-        this.$refs.hiddenTabletLandscape.isSearchVisible //testing
-      );
-      console.log(
-        'isTabletLandscape:',
-        this.$refs.hiddenTabletLandscape.isTabletLandscape //testing
-      );
     },
   },
   setup() {
