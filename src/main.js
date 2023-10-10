@@ -3,7 +3,6 @@ import App from './App.vue';
 import router from '@/router';
 ***REMOVED*** createPinia } from 'pinia';
 ***REMOVED*** useAuthStore } from '@/store/auth';
-// ***REMOVED*** useDBStore } from '@/store/database';
 
 const app = createApp(App);
 
@@ -13,8 +12,6 @@ app.use(pinia);
 
 const authStore = useAuthStore();
 authStore.initializeAuthState();
-
-app.use(authStore);
 
 app.use(router);
 
