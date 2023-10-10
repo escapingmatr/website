@@ -45,7 +45,7 @@ import PhotoCarousel from '@/components/widgets/PhotoCarousel/PhotoCarousel.vue'
 export default {
   name: 'product',
   props: {
-    stocksku: String,
+    productsku: String,
   },
   components: {
     PhotoCarousel,
@@ -57,11 +57,11 @@ export default {
   },
   computed: {
     product() {
-      // Access the stocks array from sourceData
-      const stocks = sourceData.stocks;
+      // Access the products array from sourceData
+      const products = sourceData.products;
 
       // Find the product with the matching sku
-      return stocks.find((stock) => stock.sku === this.stocksku);
+      return products.find((product) => product.sku === this.productsku);
     },
   },
   methods: {
