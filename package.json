@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "firebase": "^10.4.0",
+    "firestore": "^1.1.6",
+    "lodash": "^4.17.21",
     "path": "^0.12.7",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",

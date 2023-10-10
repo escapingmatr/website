@@ -117,9 +117,9 @@
       "materials": "100% cotton Wash at 30° C - Delicate cycle"
     },
     {
-      "sku": "je-02-23-su",
-      "slug": "je-02-23-su",
-      "name": "Two-Tuck Jeans",
+      "sku": "je-03-23-su",
+      "slug": "je-03-23-su",
+      "name": "Regular Black Jeans",
       "price": 450,
       "units": [
         {
@@ -129,12 +129,12 @@
         }
       ],
       "photos": [
-        "je-02-23-su-front.jpeg",
-        "je-02-23-su-back.jpeg",
-        "je-02-23-su-detail.jpeg",
-        "je-02-23-su-styled.jpeg"
+        "je-03-23-su-front.jpeg",
+        "je-03-23-su-back.jpeg",
+        "je-03-23-su-detail.jpeg",
+        "je-03-23-su-styled.jpeg"
       ],
-      "description": "Wide fit jeans, two-tuck at the front, light blue wash. Finished with a button fly.",
+      "description": "Regular fit jeans, light black wash. Finished with a button fly.",
       "materials": "100% cotton Wash at 30° C - Delicate cycle"
     }
   ]

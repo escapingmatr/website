@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from '@/router';
 ***REMOVED*** createPinia } from 'pinia';
 ***REMOVED*** useAuthStore } from '@/store/auth';
+// ***REMOVED*** useDBStore } from '@/store/database';
 
 const app = createApp(App);
 

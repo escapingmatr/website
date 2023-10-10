@@ -3,17 +3,17 @@
     <div class="page-title">
       <h1>Shop</h1>
     </div>
-    <div class="stocks">
-      <div class="stock" v-for="stock in stocks" :key="stock.sku">
-        <router-link :to="'/shop/' + stock.sku">
-          <div class="stock-photo">
-            <img :src="`/images/${stock.photos[2]}`" :alt="stock.name" />
+    <div class="products">
+      <div class="product" v-for="product in products" :key="product.sku">
+        <router-link :to="'/shop/' + product.sku">
+          <div class="product-photo">
+            <img :src="`/images/${product.photos[2]}`" :alt="product.name" />
           </div>
           <div class="text-info">
-            <div class="stock-name">
-              {{ stock.name }}
+            <div class="product-name">
+              {{ product.name }}
             </div>
-            <div class="stock-price">${{ stock.price }}</div>
+            <div class="product-price">${{ product.price }}</div>
           </div>
         </router-link>
       </div>
@@ -22,12 +22,18 @@
 </template>
 
 <script>
-import sourceData from '@/data.json';
+***REMOVED*** useDBStore } from '@/store/database';
 export default {
-  data() {
-    return {
-      stocks: sourceData.stocks,
-    ***REMOVED***
+  setup() {
+    const dbStore = useDBStore();
+
+    dbStore.fetchCollectionProducts();
+
+    const products = dbStore.collectionProducts;
+
+    // console.log(products[0].sku);
+
+    return { products ***REMOVED***
   },
 ***REMOVED***
 </script>
@@ -40,10 +46,10 @@ export default {
   }
 }
 
-.stocks {
+.products {
   display: flex;
-  flex-wrap: wrap; /* Allow stocks to wrap to the next line */
-  .stock {
+  flex-wrap: wrap; /* Allow products to wrap to the next line */
+  .product {
     flex: 0 0 calc(25%); /* Four items per row with a gap between */
     box-sizing: border-box; /* Include padding and border in the width calculation */
     padding: 0%;
@@ -52,20 +58,20 @@ export default {
   .text-info {
     position: relative;
     padding: 5px 2.4px 2.8px;
-    .stock-name {
-      /* Style for stock name */
+    .product-name {
+      /* Style for product name */
       font-size: 13.5px;
       font-weight: 550;
     }
-    .stock-price {
+    .product-price {
       font-size: 13.5px;
       font-weight: 550;
     }
   }
 }
 
-.stock-photo {
-  /* Style for stock photo */
+.product-photo {
+  /* Style for product photo */
   text-align: center; /* Center the image horizontally */
 }
 
