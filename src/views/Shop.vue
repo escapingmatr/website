@@ -23,15 +23,24 @@
 
 <script>
 ***REMOVED*** useDBStore } from '@/store/database';
+***REMOVED*** ref, watchEffect, onMounted } from 'vue';
+
 export default {
   setup() {
     const dbStore = useDBStore();
 
-    dbStore.fetchCollectionProducts();
+    // Use refs to create reactive variables
+    const products = ref([]);
 
-    const products = dbStore.collectionProducts;
+    // Watch for changes in collectionProducts and update the products ref
+    watchEffect(() => {
+      products.value = dbStore.collectionProducts;
+    });
 
-    // console.log(products[0].sku);
+    // Fetch data on component initialization
+    onMounted(() => {
+      dbStore.fetchCollectionProducts();
+    });
 
     return { products ***REMOVED***
   },
