@@ -2,7 +2,7 @@
   <div class="product">
     <div class="product-carousel">
       <!-- Carousel and navigation buttons here -->
-      <photo-carousel :photos="product.photos" />
+      <photo-carousel :photos="product.photos" :productSku="product.sku" />
     </div>
     <div class="text-info">
       <div class="product-name">

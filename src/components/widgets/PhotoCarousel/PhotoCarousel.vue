@@ -6,7 +6,7 @@
         <!--photos should be saved under /public/images-->
         <img
           class="photo"
-          :src="`/images/${currentPhoto}`"
+          :src="`/images/${productSku}/${currentPhoto}`"
           alt="Carousel Photo"
         />
       </div>
@@ -19,6 +19,7 @@
 export default {
   props: {
     photos: Array, // Array of photo URLs
+    productSku: String,
   },
   data() {
     return {

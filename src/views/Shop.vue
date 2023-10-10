@@ -7,7 +7,10 @@
       <div class="product" v-for="product in products" :key="product.sku">
         <router-link :to="'/shop/' + product.sku">
           <div class="product-photo">
-            <img :src="`/images/${product.photos[2]}`" :alt="product.name" />
+            <img
+              :src="`/images/${product.sku}/${product.photos[2]}`"
+              :alt="product.name"
+            />
           </div>
           <div class="text-info">
             <div class="product-name">
