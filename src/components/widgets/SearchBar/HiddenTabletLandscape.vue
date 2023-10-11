@@ -9,8 +9,8 @@
 </template>
 
 <script>
-***REMOVED*** ref, onMounted, onBeforeUnmount } from 'vue';
-***REMOVED*** useAuthStore } from '@/store/auth'; // Import your auth store module
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useAuthStore } from '@/store/auth'; // Import your auth store module
 import SearchBar from '@/components/widgets/SearchBar/SearchBar.vue'; // Import your SearchBar component
 
 export default {
@@ -24,9 +24,9 @@ export default {
 
     return {
       isSearchVisible,
-    ***REMOVED***
+    };
   },
-***REMOVED***
+};
 </script>
 
 <style scoped lang="scss">

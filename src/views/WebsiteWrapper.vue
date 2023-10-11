@@ -9,7 +9,7 @@
   import TheNavigation from '@/components/TheNavigation.vue';
   export default {
     components: { TheNavigation },
-  ***REMOVED***
+  };
 </script>
   
 <style lang="scss" scoped>

@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       currentIndex: 0,
-    ***REMOVED***
+    };
   },
   computed: {
     currentPhoto() {
@@ -40,7 +40,7 @@ export default {
       this.currentIndex = (this.currentIndex + 1) % this.photos.length;
     },
   },
-***REMOVED***
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
-***REMOVED*** defineStore } from 'pinia';
-***REMOVED*** getAuth ***REMOVED***
+import { defineStore } from 'pinia';
+import { getAuth } from 'firebase/auth';
 
 export const useStore = defineStore('store', {
   state: () => ({

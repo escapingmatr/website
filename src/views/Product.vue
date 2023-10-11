@@ -37,10 +37,10 @@
 </template>
 
 <script>
-***REMOVED*** computed } from 'vue'; // Import the computed function
+import { computed } from 'vue'; // Import the computed function
 import sourceData from '@/data.json';
 import PhotoCarousel from '@/components/widgets/PhotoCarousel/PhotoCarousel.vue';
-***REMOVED*** useStore } from '@/store/composition';
+import { useStore } from '@/store/composition';
 
 export default {
   name: 'product',
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       selectedUnit: null,
-    ***REMOVED***
+    };
   },
   computed: {
     product() {
@@ -79,11 +79,11 @@ export default {
     // Modify the bagItems and wishlistItems using actions
     const addToBag = (item) => {
       store.addToBag(item);
-    ***REMOVED***
+    };
 
     const addToWishlist = (item) => {
       store.addToWishlist(item);
-    ***REMOVED***
+    };
 
     // Return data and methods
     return {
@@ -91,9 +91,9 @@ export default {
       wishlistItems,
       addToBag,
       addToWishlist,
-    ***REMOVED***
+    };
   },
-***REMOVED***
+};
 </script>
 
 <style lang="scss" scoped>

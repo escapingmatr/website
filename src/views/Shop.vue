@@ -25,8 +25,8 @@
 </template>
 
 <script>
-***REMOVED*** useDBStore } from '@/store/database';
-***REMOVED*** ref, watchEffect, onMounted } from 'vue';
+import { useDBStore } from '@/store/database';
+import { ref, watchEffect, onMounted } from 'vue';
 
 export default {
   setup() {
@@ -45,9 +45,9 @@ export default {
       dbStore.fetchCollectionProducts();
     });
 
-    return { products ***REMOVED***
+    return { products };
   },
-***REMOVED***
+};
 </script>
 
 <style lang="scss" scoped>

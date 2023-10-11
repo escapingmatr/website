@@ -8,10 +8,10 @@
 </template>
 
 <script>
-***REMOVED*** ref, watchEffect } from 'vue'; // Import ref and watchEffect
-***REMOVED*** useStore } from '@/store/composition';
-***REMOVED*** useAuthStore } from '@/store/auth'; // Import the auth store module
-***REMOVED*** getAuth ***REMOVED*** // Import getAuth from Firebase
+import { ref, watchEffect } from 'vue'; // Import ref and watchEffect
+import { useStore } from '@/store/composition';
+import { useAuthStore } from '@/store/auth'; // Import the auth store module
+import { getAuth } from 'firebase/auth'; // Import getAuth from Firebase
 
 export default {
   setup() {
@@ -39,7 +39,7 @@ export default {
 
     return {
       cartItems,
-    ***REMOVED***
+    };
   },
-***REMOVED***
+};
 </script>

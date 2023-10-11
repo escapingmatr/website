@@ -1,12 +1,12 @@
-***REMOVED*** defineStore } from 'pinia';
-***REMOVED*** auth } from '@/firebase/init';
-***REMOVED***
-***REMOVED***
+import { defineStore } from 'pinia';
+import { auth } from '@/firebase/init';
+import {
+  getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-***REMOVED***
+} from 'firebase/auth';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({

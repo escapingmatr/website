@@ -1,5 +1,5 @@
 <script setup>
-***REMOVED*** ref } from 'vue'
+import { ref } from 'vue'
 
 defineProps({
   msg: String,

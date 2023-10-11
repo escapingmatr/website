@@ -1,8 +1,8 @@
-***REMOVED*** createApp } from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
 import router from '@/router';
-***REMOVED*** createPinia } from 'pinia';
-***REMOVED*** useAuthStore } from '@/store/auth';
+import { createPinia } from 'pinia';
+import { useAuthStore } from '@/store/auth';
 
 const app = createApp(App);
 

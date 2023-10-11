@@ -1,6 +1,6 @@
-***REMOVED*** defineStore } from 'pinia'; // Import Pinia's defineStore
-***REMOVED*** db } from '@/firebase/init'; // Import the Firebase db instance
-***REMOVED*** query, collection, getDocs } from 'firebase/firestore';
+import { defineStore } from 'pinia'; // Import Pinia's defineStore
+import { db } from '@/firebase/init'; // Import the Firebase db instance
+import { query, collection, getDocs } from 'firebase/firestore';
 
 // Define your Pinia store
 export const useDBStore = defineStore({

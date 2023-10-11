@@ -26,7 +26,7 @@ export default {
     return {
       showPopover: false,
       hidePopoverTimeout: null,
-    ***REMOVED***
+    };
   },
   methods: {
     hidePopoverWithDelay() {
@@ -43,7 +43,7 @@ export default {
       this.showPopover = false;
     },
   },
-***REMOVED***
+};
 </script>
 
 <style scoped>

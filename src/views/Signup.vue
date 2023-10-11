@@ -19,14 +19,14 @@
 </template>
 
 <script setup>
-***REMOVED*** ref } from 'vue';
-***REMOVED***
-***REMOVED***
+import { ref } from 'vue';
+import {
+  getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-***REMOVED***
-***REMOVED*** useRouter } from 'vue-router';
+} from 'firebase/auth';
+import { useRouter } from 'vue-router';
 
 const email = ref('');
 const password = ref('');
@@ -42,7 +42,7 @@ const register = () => {
       console.log(error.code);
       alert(error.message);
     });
-***REMOVED***
+};
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider)
@@ -51,7 +51,7 @@ const signInWithGoogle = () => {
       router.push('/');
     })
     .catch((error) => {});
-***REMOVED***
+};
 </script>
 
 <style lang="scss" scoped>

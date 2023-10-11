@@ -59,9 +59,9 @@
 </template>
 
 <script>
-***REMOVED*** ref } from 'vue';
-***REMOVED*** useRouter } from 'vue-router';
-***REMOVED*** useAuthStore } from '@/store/auth';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 import HiddenTabletLandscape from '@/components/widgets/SearchBar/HiddenTabletLandscape.vue';
 import PopoverHoverLink from '@/components/widgets/Popover/ProfilePopover.vue';
 
@@ -87,12 +87,12 @@ export default {
 
     const toggleModal = () => {
       modalActive.value = !modalActive.value;
-    ***REMOVED***
+    };
 
     const logout = () => {
       authStore.signOut();
       router.push('/');
-    ***REMOVED***
+    };
 
     return {
       router,
@@ -100,9 +100,9 @@ export default {
       modalActive,
       toggleModal,
       logout,
-    ***REMOVED***
+    };
   },
-***REMOVED***
+};
 </script>
 
 <style lang="scss" scoped>

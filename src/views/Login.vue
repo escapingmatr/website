@@ -20,9 +20,9 @@
 </template>
 
 <script setup>
-***REMOVED*** ref } from 'vue';
-***REMOVED*** useRouter } from 'vue-router';
-***REMOVED*** useAuthStore } from '@/store/auth';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 
 const email = ref('');
 const password = ref('');
@@ -39,7 +39,7 @@ const signInWithEmailAndPassword = async () => {
     // Redirect or perform any other actions on successful login
     router.push('/'); // Example: Redirect to a dashboard page
   }
-***REMOVED***
+};
 
 const signInWithGoogle = async () => {
   const success = await authStore.signInWithGoogle();
@@ -47,7 +47,7 @@ const signInWithGoogle = async () => {
     // Redirect or perform any other actions on successful login
     router.push('/'); // Example: Redirect to a dashboard page
   }
-***REMOVED***
+};
 </script>
 
 <style lang="scss" scoped>

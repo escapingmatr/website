@@ -8,7 +8,7 @@
 </template>
 
 <script>
-***REMOVED*** useStore } from '@/store/composition';
+import { useStore } from '@/store/composition';
 
 export default {
   setup() {
@@ -17,7 +17,7 @@ export default {
 
     return {
       wishlistItems,
-    ***REMOVED***
+    };
   },
-***REMOVED***
+};
 </script>
