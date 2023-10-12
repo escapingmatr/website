@@ -8,7 +8,7 @@ Ongoing project on developing a fully functioning e-Commerce clothing brand webs
 
 **State Management**: Pinia
 
-Currently working on: Wishlist & Cart State Management
+**Currently working on**: Wishlist & Cart State Management
 
 # Vue 3 + Vite
 
