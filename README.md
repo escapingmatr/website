@@ -1,12 +1,12 @@
 # Project Description
 
-Ongoing project on developing a fully functioning e-Commerce clothing brand website using Vue3 + Vite and Firebase.
+Ongoing project on developing a fully functioning e-Commerce clothing brand website using Vue3 + Vite.
 
-Firebase is used for user authentication and Firestore is used for storing databases.
+Authentication: Firebase
+Database: Firestore
+State Management: Pinia
 
-Pinia is used for state management throughout the application.
-
-Currently working on: Retrieving products data from Firestore database and apply it on dynamic product page.
+Currently working on: Wishlist & Cart State Management
 
 # Vue 3 + Vite
 
