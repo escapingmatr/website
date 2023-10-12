@@ -13,13 +13,13 @@
       </div>
       <div class="unit-buttons">
         <button
-          v-for="(unitValue, unitSize) in product.units"
+          v-for="(unitSize, unitIndex) in sortedSizes"
           :key="unitSize"
           class="unit-button"
-          :class="{ active: selectedUnit === unitSize }"
-          @click="selectUnit(unitSize)"
+          :class="{ active: selectedUnit === unitIndex }"
+          @click="selectUnit(unitIndex)"
         >
-          {{ unitSize }}
+          {{ unitSize[0] }}
         </button>
       </div>
       <div class="actions">
@@ -93,6 +93,34 @@ export default {
       selectedUnit.value = unitSize;
     };
 
+    // Define a custom order for non-numeric sizes
+    const nonNumericSizeOrder = ['S', 'M', 'L', 'XL'];
+
+    // Create a computed property to sort the sizes
+    const sortedSizes = computed(() => {
+      const sizes = product.value.units; // Assuming product.units is a map
+
+      // Check if sizes are numeric (pants sizes) or non-numeric (e.g., S, M, L, XL)
+      const numericSizes = Object.entries(sizes)
+        .filter(([size]) => !isNaN(size))
+        .sort((a, b) => parseFloat(a[0]) - parseFloat(b[0])); // Sort numeric sizes
+
+      const nonNumericSizes = Object.entries(sizes)
+        .filter(([size]) => isNaN(size))
+        .sort(
+          (a, b) =>
+            nonNumericSizeOrder.indexOf(a[0]) -
+            nonNumericSizeOrder.indexOf(b[0])
+        ); // Sort non-numeric sizes based on the custom order
+
+      // Combine the sorted sizes and convert them back to a map
+      const sortedMap = new Map([...numericSizes, ...nonNumericSizes]);
+
+      console.log(sortedMap);
+
+      return sortedMap;
+    });
+
     // wishlist & shopping cart implementation
     const store = useStore();
 
@@ -114,6 +142,7 @@ export default {
       product,
       selectedUnit,
       selectUnit,
+      sortedSizes,
       bagItems,
       wishlistItems,
       addToBag,

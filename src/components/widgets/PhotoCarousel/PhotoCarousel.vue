@@ -71,8 +71,11 @@ export default {
   border: none; /* Remove the border */
   outline: none; /* Remove the outline */
   transition: background-color 0.3s;
+  color: black;
+  border: 1px solid white;
   &:hover {
     background-color: rgba(0, 0, 0, 0.7); /* Change color on hover */
+    color: white;
   }
   &.left {
     left: 0;
