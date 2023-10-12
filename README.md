@@ -2,11 +2,11 @@
 
 Ongoing project on developing a fully functioning e-Commerce clothing brand website using Vue3 + Vite.
 
-Authentication: Firebase
+**Authentication**: Firebase
 
-Database: Firestore
+**Database**: Firestore
 
-State Management: Pinia
+**State Management**: Pinia
 
 Currently working on: Wishlist & Cart State Management
 
