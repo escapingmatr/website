@@ -83,19 +83,12 @@ export default {
 
     // Call the fetchProductData function when the component is mounted
     onMounted(() => {
-      console.log('message');
       dbStore
         .fetchDocumentFromFirestore(collectionName, documentId)
         .then(() => {
           product.value = dbStore.getDocumentData;
-          console.log(product.value);
         });
     });
-
-    console.log(product.value);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // wishlist & shopping cart implementation
     const store = useStore();
@@ -152,7 +145,7 @@ export default {
   transition: background-color 0.3s;
 }
 
-.unit-button.active {
+.unit-button:active {
   background-color: #ccc; /* Change to your desired active color */
 }
 
