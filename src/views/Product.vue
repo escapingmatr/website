@@ -1,8 +1,5 @@
 <template>
   <div class="product-page">
-    <!-- Display a loading state while product data is being fetched -->
-    <!-- <div v-if="isLoading" class="loading">Loading product...</div> -->
-
     <div class="product-carousel">
       <!-- Carousel and navigation buttons here -->
       <photo-carousel :photos="product.photos" :productSku="product.sku" />
@@ -49,7 +46,6 @@ export default {
   name: 'product-page',
   data() {
     return {
-      loading: false,
       post: null,
       error: null,
     };
@@ -63,7 +59,7 @@ export default {
   setup(props) {
     const dbStore = useDBStore();
 
-    // Create refs for product data and loading state
+    // Create refs for product data
     const product = ref({
       photos: [],
       name: '',
@@ -73,7 +69,6 @@ export default {
       materials: '',
       sku: '',
     });
-    const isLoading = ref(true);
     const collectionName = 'products';
     const documentId = props.productsku;
 
@@ -89,6 +84,14 @@ export default {
           product.value = dbStore.getDocumentData;
         });
     });
+
+    // Add a ref for the currently selected unit
+    const selectedUnit = ref(null);
+
+    // Method to select a unit
+    const selectUnit = (unitSize) => {
+      selectedUnit.value = unitSize;
+    };
 
     // wishlist & shopping cart implementation
     const store = useStore();
@@ -109,7 +112,8 @@ export default {
     // Return data and methods
     return {
       product,
-      isLoading,
+      selectedUnit,
+      selectUnit,
       bagItems,
       wishlistItems,
       addToBag,
@@ -145,7 +149,7 @@ export default {
   transition: background-color 0.3s;
 }
 
-.unit-button:active {
+.unit-button.active {
   background-color: #ccc; /* Change to your desired active color */
 }
 
