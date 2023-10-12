@@ -1,5 +1,8 @@
 <template>
-  <div class="product">
+  <div class="product-page">
+    <!-- Display a loading state while product data is being fetched -->
+    <!-- <div v-if="isLoading" class="loading">Loading product...</div> -->
+
     <div class="product-carousel">
       <!-- Carousel and navigation buttons here -->
       <photo-carousel :photos="product.photos" :productSku="product.sku" />
@@ -13,7 +16,7 @@
       </div>
       <div class="unit-buttons">
         <button
-          v-for="(unitValue, unitSize) in product.units[0]"
+          v-for="(unitValue, unitSize) in product.units"
           :key="unitSize"
           class="unit-button"
           :class="{ active: selectedUnit === unitSize }"
@@ -31,45 +34,70 @@
         </button>
       </div>
       <p>{{ product.description }}</p>
-      <p>Materials: {{ product.materials }}</p>
+      <p>Materials: {{ product.materials[0] }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'; // Import the computed function
-import sourceData from '@/data.json';
+import { ref, computed, onMounted, watchEffect } from 'vue';
 import PhotoCarousel from '@/components/widgets/PhotoCarousel/PhotoCarousel.vue';
 import { useStore } from '@/store/composition';
+import { useDBStore } from '@/store/database';
 
 export default {
-  name: 'product',
+  name: 'product-page',
+  data() {
+    return {
+      loading: false,
+      post: null,
+      error: null,
+    };
+  },
   props: {
     productsku: String,
   },
   components: {
     PhotoCarousel,
   },
-  data() {
-    return {
-      selectedUnit: null,
-    };
-  },
-  computed: {
-    product() {
-      // Access the products array from sourceData
-      const products = sourceData.products;
+  setup(props) {
+    const dbStore = useDBStore();
 
-      // Find the product with the matching sku
-      return products.find((product) => product.sku === this.productsku);
-    },
-  },
-  methods: {
-    selectUnit(unitSize) {
-      this.selectedUnit = unitSize;
-    },
-  },
-  setup() {
+    // Create refs for product data and loading state
+    const product = ref({
+      photos: [],
+      name: '',
+      price: 0,
+      units: {},
+      description: '',
+      materials: '',
+      sku: '',
+    });
+    const isLoading = ref(true);
+    const collectionName = 'products';
+    const documentId = props.productsku;
+
+    watchEffect(() => {
+      product.value = dbStore.getDocumentData; // this works
+    });
+
+    // Call the fetchProductData function when the component is mounted
+    onMounted(() => {
+      console.log('message');
+      dbStore
+        .fetchDocumentFromFirestore(collectionName, documentId)
+        .then(() => {
+          product.value = dbStore.getDocumentData;
+          console.log(product.value);
+        });
+    });
+
+    console.log(product.value);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // wishlist & shopping cart implementation
     const store = useStore();
 
     // Access the bagItems and wishlistItems
@@ -87,6 +115,8 @@ export default {
 
     // Return data and methods
     return {
+      product,
+      isLoading,
       bagItems,
       wishlistItems,
       addToBag,
@@ -97,7 +127,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.product {
+.product-page {
   display: flex;
   padding: 20px;
 }
@@ -140,6 +170,7 @@ export default {
   transition: background-color 0.3s;
 }
 
+.unit-button:hover,
 .add-to-bag:hover,
 .add-to-wishlist:hover {
   background-color: #ccc; /* Change to your desired hover color */

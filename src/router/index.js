@@ -33,7 +33,7 @@ const routes = [
       { path: '/login', name: 'Login', component: Login },
       { path: '/profile', name: 'Profile', component: Profile },
       {
-        path: '/shop/:stocksku',
+        path: '/shop/:productsku',
         name: 'product',
         component: Product,
         props: true,
