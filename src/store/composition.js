@@ -3,6 +3,7 @@ import { useAuthStore } from '@/store/auth';
 import { db } from '@/firebase/init';
 import { getAuth } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { times } from 'lodash';
 
 export const useStore = defineStore('store', {
   state: () => ({
@@ -10,8 +11,9 @@ export const useStore = defineStore('store', {
     wishlistItems: [],
   }),
   actions: {
-    addToBag(item) {
+    addToBag(item, size) {
       const auth = getAuth(); // Get the auth instance
+      const timestamp = new Date(Date.now());
       if (auth.currentUser) {
         // If user is logged in, save item to Firebase
         const userId = auth.currentUser.uid;
@@ -27,10 +29,15 @@ export const useStore = defineStore('store', {
         items.push(item);
         localStorage.setItem('bagItems', JSON.stringify(items));
       }
-      this.bagItems.push(item); // Update state
+      this.bagItems.push({
+        item: item,
+        size: size,
+        timestamp: timestamp,
+      }); // Update state
     },
-    addToWishlist(item) {
+    addToWishlist(item, size) {
       const auth = getAuth(); // Get the auth instance
+      const timestamp = new Date(Date.now());
       if (auth.currentUser) {
         // If user is logged in, save item to Firebase
         const userId = auth.currentUser.uid;
@@ -46,7 +53,11 @@ export const useStore = defineStore('store', {
         items.push(item);
         localStorage.setItem('wishlistItems', JSON.stringify(items));
       }
-      this.wishlistItems.push(item); // Update state
+      this.wishlistItems.push({
+        item: item,
+        size: size,
+        timestamp: timestamp,
+      }); // Update state
     },
   },
 });
