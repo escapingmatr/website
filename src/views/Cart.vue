@@ -11,23 +11,18 @@
 import { ref, watchEffect } from 'vue'; // Import ref and watchEffect
 import { useStore } from '@/store/composition';
 import { useAuthStore } from '@/store/auth'; // Import the auth store module
-import { getAuth } from 'firebase/auth'; // Import getAuth from Firebase
 
 export default {
   setup() {
     const store = useStore();
-    const auth = getAuth(); // Get the auth instance
-    const bagItems = store.bagItems;
-
-    // Check if user is logged in
     const authStore = useAuthStore(); // Use the auth store module
-    const isLoggedIn = ref(auth.currentUser !== null); // Use ref to track auth state
+    const bagItems = store.bagItems;
 
     let cartItems = [];
 
     // Use watchEffect to react to changes in auth state
     watchEffect(() => {
-      if (isLoggedIn.value) {
+      if (authStore.isAuthenticated) {
         // User is logged in, use bag items from Firebase
         cartItems = bagItems;
       } else {

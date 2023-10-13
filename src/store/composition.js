@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia';
+import { useAuthStore } from '@/store/auth';
+import { db } from '@/firebase/init';
 import { getAuth } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 export const useStore = defineStore('store', {
   state: () => ({
@@ -38,7 +41,7 @@ export const useStore = defineStore('store', {
         userWishlistRef.add(item);
       } else {
         // If user is not logged in, save item to local storage
-        const wishlistItems = localStorage.getItem('wishlistItems');
+        const wishlistItems = loadWishlistFromLocalStorage();
         const items = wishlistItems ? JSON.parse(wishlistItems) : [];
         items.push(item);
         localStorage.setItem('wishlistItems', JSON.stringify(items));

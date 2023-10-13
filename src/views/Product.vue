@@ -171,7 +171,10 @@ export default {
 
 .unit-button {
   margin-right: 10px;
-  padding: 5px 10px;
+  width: 28px;
+  height: 26px;
+  text-align: center;
+  justify-content: center;
   background-color: transparent;
   border: none;
   cursor: pointer;
