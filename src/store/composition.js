@@ -68,7 +68,7 @@ export const useStore = defineStore('store', {
       if (auth.currentUser) {
         // If the user is logged in, remove the item from Firebase
         const userId = auth.currentUser.uid;
-        const userWishlistRef = firestore
+        const userWishlistRef = db
           .collection('users')
           .doc(userId)
           .collection('wishlist');

@@ -63,24 +63,27 @@ export default {
   },
   setup() {
     const store = useStore();
-    const wishlistItems = store.wishlistItems;
     const authStore = useAuthStore();
+    let wishItems = ref([]);
 
-    let wishItems = [];
-
+    // Create a watchEffect to automatically update sortedWishItems when wishItems change
     watchEffect(() => {
       if (authStore.isAuthenticated) {
-        wishItems = wishlistItems;
+        wishItems.value = store.wishlistItems;
       } else {
         const localWishlistItems = localStorage.getItem('wishlistItems');
-        wishItems = localWishlistItems ? JSON.parse(localWishlistItems) : [];
+        wishItems.value = localWishlistItems
+          ? JSON.parse(localWishlistItems)
+          : [];
       }
     });
 
     const sortedWishItems = ref([]);
 
+    // Create a watchEffect to sort and reverse wishItems when they change
     watchEffect(() => {
-      sortedWishItems.value = wishItems
+      sortedWishItems.value = wishItems.value
+        .slice() // Create a shallow copy to avoid mutating the original array
         .sort((a, b) => a.timestamp - b.timestamp)
         .reverse();
     });
@@ -95,7 +98,29 @@ export default {
     };
 
     const removeFromWishlist = (wishItem) => {
-      store.removeFromWishlist(wishItem);
+      // Immediately remove the item from the local state
+      const index = wishItems.value.findIndex(
+        (item) => item.timestamp === wishItem.timestamp
+      );
+      if (index !== -1) {
+        wishItems.value.splice(index, 1);
+      }
+
+      // If the user is authenticated, remove it from the server
+      if (authStore.isAuthenticated) {
+        store.removeFromWishlist(wishItem);
+      } else {
+        // If the user is not authenticated, remove it from local storage
+        const localWishlistItems = localStorage.getItem('wishlistItems');
+        const items = localWishlistItems ? JSON.parse(localWishlistItems) : [];
+        const itemIndex = items.findIndex(
+          (item) => item.timestamp === wishItem.timestamp
+        );
+        if (itemIndex !== -1) {
+          items.splice(itemIndex, 1);
+          localStorage.setItem('wishlistItems', JSON.stringify(items));
+        }
+      }
     };
 
     return {
