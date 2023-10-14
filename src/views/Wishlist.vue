@@ -105,22 +105,8 @@ export default {
       if (index !== -1) {
         wishItems.value.splice(index, 1);
       }
-
-      // If the user is authenticated, remove it from the server
-      if (authStore.isAuthenticated) {
-        store.removeFromWishlist(wishItem);
-      } else {
-        // If the user is not authenticated, remove it from local storage
-        const localWishlistItems = localStorage.getItem('wishlistItems');
-        const items = localWishlistItems ? JSON.parse(localWishlistItems) : [];
-        const itemIndex = items.findIndex(
-          (item) => item.timestamp === wishItem.timestamp
-        );
-        if (itemIndex !== -1) {
-          items.splice(itemIndex, 1);
-          localStorage.setItem('wishlistItems', JSON.stringify(items));
-        }
-      }
+      // update database
+      store.removeFromWishlist(wishItem);
     };
 
     return {
