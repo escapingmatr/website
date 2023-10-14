@@ -9,29 +9,30 @@
         <h1>{{ product.name }}</h1>
       </div>
       <div class="price-box">
-        <p class="price">Price: ${{ product.price }}</p>
+        <p class="price">${{ product.price }}</p>
       </div>
-      <div class="unit-buttons">
-        <button
-          v-for="(unitSize, unitIndex) in sortedSizes"
-          :key="unitSize"
-          class="unit-button"
-          :class="{ active: selectedUnit === unitIndex }"
-          @click="selectUnit(unitIndex)"
-        >
-          {{ unitSize[0] }}
-        </button>
-      </div>
+      <size-dropdown
+        :id="productSizeSelectId"
+        :label="label"
+        :units="product.units"
+        :selectedUnit="selectedUnit"
+        :defaultOption="defaultOption"
+        @update:selectedUnit="selectedUnit = $event"
+      />
       <div class="actions">
         <button class="add-to-bag" @click="addToBag(product)">
           Add to Bag
         </button>
-        <button class="add-to-wishlist" @click="addToWishlist(product)">
+        <button
+          class="add-to-wishlist"
+          @click="addToWishlist(product, selectedUnit)"
+        >
           Add to Wishlist
         </button>
       </div>
       <p>{{ product.description }}</p>
       <p>Materials: {{ product.materials[0] }}</p>
+      <p>Care Instructions: {{ product.materials[1] }}</p>
     </div>
   </div>
 </template>
@@ -39,6 +40,7 @@
 <script>
 import { ref, computed, onMounted, watchEffect } from 'vue';
 import PhotoCarousel from '@/components/widgets/PhotoCarousel/PhotoCarousel.vue';
+import SizeDropdown from '@/components/widgets/Dropdown/SizeDropdown.vue';
 import { useStore } from '@/store/composition';
 import { useDBStore } from '@/store/database';
 
@@ -48,6 +50,9 @@ export default {
     return {
       post: null,
       error: null,
+      productSizeSelectId: 'size-select',
+      label: '',
+      defaultOption: 'SELECT A SIZE',
     };
   },
   props: {
@@ -55,6 +60,7 @@ export default {
   },
   components: {
     PhotoCarousel,
+    SizeDropdown,
   },
   setup(props) {
     const dbStore = useDBStore();
@@ -88,38 +94,21 @@ export default {
     // Add a ref for the currently selected unit
     const selectedUnit = ref(null);
 
-    // Method to select a unit
-    const selectUnit = (unitSize) => {
-      selectedUnit.value = unitSize;
+    // Define the label ref to hold the selected size
+    const label = ref('Size:');
+
+    // Method to update the label with the selected size
+    const updateLabel = () => {
+      if (selectedUnit.value !== null) {
+        const selectedSizeUnitPair = product.value.units[selectedUnit.value];
+        const selectedSize = selectedSizeUnitPair
+          ? Object.keys(selectedSizeUnitPair)[0]
+          : '';
+        label.value = `Size: ${selectedSize}`;
+      } else {
+        label.value = 'Size:';
+      }
     };
-
-    // Define a custom order for non-numeric sizes
-    const nonNumericSizeOrder = ['S', 'M', 'L', 'XL'];
-
-    // Create a computed property to sort the sizes
-    const sortedSizes = computed(() => {
-      const sizes = product.value.units; // Assuming product.units is a map
-
-      // Check if sizes are numeric (pants sizes) or non-numeric (e.g., S, M, L, XL)
-      const numericSizes = Object.entries(sizes)
-        .filter(([size]) => !isNaN(size))
-        .sort((a, b) => parseFloat(a[0]) - parseFloat(b[0])); // Sort numeric sizes
-
-      const nonNumericSizes = Object.entries(sizes)
-        .filter(([size]) => isNaN(size))
-        .sort(
-          (a, b) =>
-            nonNumericSizeOrder.indexOf(a[0]) -
-            nonNumericSizeOrder.indexOf(b[0])
-        ); // Sort non-numeric sizes based on the custom order
-
-      // Combine the sorted sizes and convert them back to a map
-      const sortedMap = new Map([...numericSizes, ...nonNumericSizes]);
-
-      console.log(sortedMap);
-
-      return sortedMap;
-    });
 
     // wishlist & shopping cart implementation
     const store = useStore();
@@ -133,16 +122,15 @@ export default {
       store.addToBag(item);
     };
 
-    const addToWishlist = (item) => {
-      store.addToWishlist(item);
+    const addToWishlist = (item, selectedUnit) => {
+      store.addToWishlist(item, selectedUnit);
     };
 
     // Return data and methods
     return {
       product,
       selectedUnit,
-      selectUnit,
-      sortedSizes,
+      updateLabel,
       bagItems,
       wishlistItems,
       addToBag,
