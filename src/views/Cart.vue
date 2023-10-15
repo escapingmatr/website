@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="actions">
-          <div class="remove-from-wishlist" @click="removeFrombag(bagItem)">
+          <div class="remove-from-wishlist" @click="removeFromBag(bagItem)">
             REMOVE
           </div>
         </div>
@@ -80,14 +80,24 @@ export default {
       // You can navigate to the checkout page or perform other actions.
     };
 
-    const removeFrombag = (bagItem) => {
-      // Immediately remove the item from the local state
+    const removeFromBag = (bagItem) => {
+      // Remove the item from the local state
       const index = bagItems.value.findIndex(
         (item) => item.timestamp === bagItem.timestamp
       );
       if (index !== -1) {
         bagItems.value.splice(index, 1);
       }
+      // Reorganize sizes
+      const removedSize = bagItem.size;
+      const itemSizes = bagItems.value.map((item) => item.size);
+      const sizeIndex = itemSizes.indexOf(removedSize);
+      if (sizeIndex !== -1) {
+        itemSizes.splice(sizeIndex, 1);
+      }
+      // Update the state with the new sizes
+      sizes.value = itemSizes;
+
       // update database
       store.removeFromBag(bagItem);
     };
@@ -95,7 +105,7 @@ export default {
     return {
       authStore,
       bagItems,
-      removeFrombag,
+      removeFromBag,
       proceedToCheckout,
     };
   },

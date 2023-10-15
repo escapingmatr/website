@@ -98,14 +98,25 @@ export default {
     };
 
     const removeFromWishlist = (wishItem) => {
-      // Immediately remove the item from the local state
+      // Remove the item from the local state
       const index = wishItems.value.findIndex(
         (item) => item.timestamp === wishItem.timestamp
       );
       if (index !== -1) {
         wishItems.value.splice(index, 1);
       }
-      // update database
+
+      // Reorganize sizes
+      const removedSize = wishItem.size;
+      const itemSizes = wishItems.value.map((item) => item.size);
+      const sizeIndex = itemSizes.indexOf(removedSize);
+      if (sizeIndex !== -1) {
+        itemSizes.splice(sizeIndex, 1);
+      }
+      // Update the state with the new sizes
+      wishItems.value = itemSizes; // Corrected variable name
+
+      // Update the database
       store.removeFromWishlist(wishItem);
     };
 

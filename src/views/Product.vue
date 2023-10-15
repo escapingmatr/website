@@ -20,7 +20,7 @@
         @update:selectedUnit="selectedUnit = $event"
       />
       <div class="actions">
-        <button class="add-to-bag" @click="addToBag(product)">
+        <button class="add-to-bag" @click="addToBag(product, selectedUnit)">
           Add to Bag
         </button>
         <button
@@ -118,12 +118,12 @@ export default {
     const wishlistItems = computed(() => store.wishlistItems);
 
     // Modify the bagItems and wishlistItems using actions
-    const addToBag = (item) => {
-      store.addToBag(item);
+    const addToBag = (item, size) => {
+      store.addToBag(item, size);
     };
 
-    const addToWishlist = (item, selectedUnit) => {
-      store.addToWishlist(item, selectedUnit);
+    const addToWishlist = (item, size) => {
+      store.addToWishlist(item, size);
     };
 
     // Return data and methods

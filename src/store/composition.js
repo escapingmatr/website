@@ -114,7 +114,6 @@ export const useStore = defineStore('store', {
           .collection('users')
           .doc(userId)
           .collection('wishlist');
-
         // To remove the item by timestamp, query for the specific item and delete it
         userWishlistRef
           .where('timestamp', '==', wishItem.timestamp)
