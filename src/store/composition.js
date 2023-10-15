@@ -37,6 +37,48 @@ export const useStore = defineStore('store', {
       }
       this.bagItems.push(bagItem); // Update state
     },
+    removeFromBag(bagItem) {
+      const auth = getAuth(); // Get the auth instance
+      if (auth.currentUser) {
+        // If the user is logged in, remove the item from Firebase
+        const userId = auth.currentUser.uid;
+        const userBagRef = db
+          .collection('users')
+          .doc(userId)
+          .collection('bagItem');
+
+        // To remove the item by timestamp, query for the specific item and delete it
+        userWishlistRef
+          .where('timestamp', '==', bagItem.timestamp)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              doc.ref.delete();
+            });
+          });
+      } else {
+        // If the user is not logged in, remove the item from local storage
+        const bagItems = localStorage.getItem('bagItems');
+        const items = bagItems ? JSON.parse(bagItems) : [];
+
+        // Find the index of the item to remove by comparing timestamps
+        const index = items.findIndex(
+          (item) => item.timestamp === bagItem.timestamp
+        );
+        if (index !== -1) {
+          items.splice(index, 1);
+          localStorage.setItem('bagItems', JSON.stringify(items));
+        }
+      }
+
+      // Remove the item from the local state by comparing timestamps
+      const index = this.bagItems.findIndex(
+        (item) => item.timestamp === bagItem.timestamp
+      );
+      if (index !== -1) {
+        this.bagItems.splice(index, 1);
+      }
+    },
     addToWishlist(item, size) {
       const auth = getAuth(); // Get the auth instance
       const timestamp = new Date(Date.now());

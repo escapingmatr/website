@@ -12,15 +12,19 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     auth: getAuth(),
+    initialized: false, // Add an initialized property
   }),
   getters: {
     isAuthenticated: (state) => !!state.user,
   },
   actions: {
     initializeAuthState() {
-      // Listen for changes in authentication state
-      onAuthStateChanged(this.auth, (user) => {
-        this.user = user; // Update the user state in the store
+      return new Promise((resolve) => {
+        onAuthStateChanged(this.auth, (user) => {
+          this.user = user;
+          this.initialized = true; // Set initialized to true
+          resolve();
+        });
       });
     },
     async signInWithEmailAndPassword(email, password) {

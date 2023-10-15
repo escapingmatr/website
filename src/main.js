@@ -11,7 +11,7 @@ const pinia = createPinia();
 app.use(pinia);
 
 const authStore = useAuthStore();
-authStore.initializeAuthState();
+authStore.initializeAuthState(); // Initialize the auth state
 
 app.use(router);
 
