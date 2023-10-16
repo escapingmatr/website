@@ -97,7 +97,7 @@ export default {
       removeFromWishlist(wishItem);
     };
 
-    const removeFromWishlist = (wishItem) => {
+    const removeFromWishlist = async (wishItem) => {
       // Remove the item from the local state
       const index = wishItems.value.findIndex(
         (item) => item.timestamp === wishItem.timestamp
@@ -105,16 +105,6 @@ export default {
       if (index !== -1) {
         wishItems.value.splice(index, 1);
       }
-
-      // Reorganize sizes
-      const removedSize = wishItem.size;
-      const itemSizes = wishItems.value.map((item) => item.size);
-      const sizeIndex = itemSizes.indexOf(removedSize);
-      if (sizeIndex !== -1) {
-        itemSizes.splice(sizeIndex, 1);
-      }
-      // Update the state with the new sizes
-      wishItems.value = itemSizes; // Corrected variable name
 
       // Update the database
       store.removeFromWishlist(wishItem);

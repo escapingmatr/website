@@ -1,43 +1,49 @@
 <template>
   <div>
     <h2>Shopping Bag</h2>
-    <div class="bag-items">
-      <div class="bag-item" v-for="bagItem in bagItems" :key="bagItem.item.id">
-        <div class="bag-item-details">
-          <div class="bag-item-photo">
-            <img
-              :src="`/images/${bagItem.item.sku}/${bagItem.item.photos[2]}`"
-              :alt="bagItem.item.name"
-            />
+    <div class="shopping-bag">
+      <div class="bag-items">
+        <div
+          class="bag-item"
+          v-for="bagItem in bagItems"
+          :key="bagItem.item.id"
+        >
+          <div class="bag-item-details">
+            <div class="bag-item-photo">
+              <img
+                :src="`/images/${bagItem.item.sku}/${bagItem.item.photos[2]}`"
+                :alt="bagItem.item.name"
+              />
+            </div>
+            <div class="bag-item-info">
+              <p class="bag-item-name">{{ bagItem.item.name }}</p>
+              <size-dropdown
+                :id="'size-select-' + bagItem.timestamp"
+                :label="label"
+                :units="bagItem.item.units"
+                :selectedUnit="bagItem.size"
+                :defaultOption="defaultOption"
+                @update:selectedUnit="selectedUnit = $event"
+              />
+              <p class="bag-item-price">$ {{ bagItem.item.price }}</p>
+            </div>
           </div>
-          <div class="bag-item-info">
-            <p class="bag-item-name">{{ bagItem.item.name }}</p>
-            <size-dropdown
-              :id="'size-select-' + bagItem.timestamp"
-              :label="label"
-              :units="bagItem.item.units"
-              :selectedUnit="bagItem.size"
-              :defaultOption="defaultOption"
-              @update:selectedUnit="selectedUnit = $event"
-            />
-            <p class="bag-item-price">$ {{ bagItem.item.price }}</p>
-          </div>
-        </div>
-        <div class="actions">
-          <div class="remove-from-wishlist" @click="removeFromBag(bagItem)">
-            REMOVE
+          <div class="actions">
+            <div class="remove-from-wishlist" @click="removeFromBag(bagItem)">
+              REMOVE
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="checkout-section">
-      <div class="user-account">
-        <div v-if="authStore.isAuthenticated">
-          Logged in as {{ authStore.user.displayName }}
+      <div class="checkout-section">
+        <div class="user-account">
+          <div v-if="authStore.isAuthenticated">
+            Logged in as {{ authStore.user.displayName }}
+          </div>
+          <div v-else>Not logged in</div>
         </div>
-        <div v-else>Not logged in</div>
+        <button @click="proceedToCheckout">Proceed to Checkout</button>
       </div>
-      <button @click="proceedToCheckout">Proceed to Checkout</button>
     </div>
   </div>
 </template>
@@ -88,15 +94,6 @@ export default {
       if (index !== -1) {
         bagItems.value.splice(index, 1);
       }
-      // Reorganize sizes
-      const removedSize = bagItem.size;
-      const itemSizes = bagItems.value.map((item) => item.size);
-      const sizeIndex = itemSizes.indexOf(removedSize);
-      if (sizeIndex !== -1) {
-        itemSizes.splice(sizeIndex, 1);
-      }
-      // Update the state with the new sizes
-      sizes.value = itemSizes;
 
       // update database
       store.removeFromBag(bagItem);
@@ -113,66 +110,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bag-items {
+.shopping-bag {
   display: flex;
-  flex-wrap: wrap;
-}
+  .bag-items {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 70vw;
+    .bag-item {
+      flex: 0 0 calc(50% - 16px); /* Two items per row with some spacing */
+      margin: 8px;
+      border: 1px solid #ccc;
+      display: flex;
+      padding: 8px;
 
-.bag-item {
-  flex: 0 0 calc(50% - 16px); /* Two items per row with some spacing */
-  margin: 8px;
-  border: 1px solid #ccc;
-  display: flex;
-  padding: 8px;
-  .actions {
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
+      .bag-item-details {
+        display: flex;
+        width: 100%;
+        .bag-item-photo {
+          flex: 1;
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        }
+        .bag-item-info {
+          flex: 2;
+          padding: 0 16px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .bag-item-name {
+          font-size: 1.2rem;
+          font-weight: 500;
+          margin: 0;
+        }
+
+        .bag-item-price {
+          font-size: 1rem;
+          margin-top: 8px;
+          color: #007bff;
+        }
+      }
+
+      .actions {
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   }
-}
-
-.bag-item-details {
-  display: flex;
-  width: 100%;
-}
-
-.bag-item-photo {
-  flex: 1;
-}
-
-.bag-item-photo img {
-  max-width: 100%;
-  height: auto;
-}
-
-.bag-item-info {
-  flex: 2;
-  padding: 0 16px;
-  display: flex;
-  flex-direction: column;
-}
-
-.bag-item-name {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin: 0;
-}
-
-.bag-item-price {
-  font-size: 1rem;
-  margin-top: 8px;
-  color: #007bff;
-}
-
-.checkout-section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-top: 16px;
-}
-
-.user-account {
-  margin-bottom: 16px;
+  .checkout-section {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+    .user-account {
+      margin-bottom: 16px;
+    }
+  }
 }
 
 button {

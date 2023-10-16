@@ -127,7 +127,6 @@ export const useStore = defineStore('store', {
         // If the user is not logged in, remove the item from local storage
         const wishlistItems = localStorage.getItem('wishlistItems');
         const items = wishlistItems ? JSON.parse(wishlistItems) : [];
-
         // Find the index of the item to remove by comparing timestamps
         const index = items.findIndex(
           (item) => item.timestamp === wishItem.timestamp

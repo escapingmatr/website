@@ -28,6 +28,12 @@ export default {
       localSelectedUnit: this.selectedUnit,
     };
   },
+  watch: {
+    // Watch for changes in the selectedUnit prop and update localSelectedUnit
+    selectedUnit(newSelectedUnit) {
+      this.localSelectedUnit = newSelectedUnit;
+    },
+  },
   methods: {
     updateLabel() {
       this.$emit('update:selectedUnit', this.localSelectedUnit);
