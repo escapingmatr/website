@@ -115,7 +115,6 @@ export default {
   .bag-items {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     width: 70vw;
     .bag-item {
       flex: 0 0 calc(50% - 16px); /* Two items per row with some spacing */
