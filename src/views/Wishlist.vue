@@ -30,7 +30,9 @@
           @update:selectedUnit="selectedUnit = $event"
         />
         <div class="actions">
-          <div class="move-to-bag" @click="moveToBag(wishItem)">ADD TO BAG</div>
+          <div class="move-to-bag" @click="moveToBag(wishItem, selectedUnit)">
+            ADD TO BAG
+          </div>
           <div
             class="remove-from-wishlist"
             @click="removeFromWishlist(wishItem)"
@@ -92,8 +94,25 @@ export default {
       return wishItem.item.units[wishItem.size];
     };
 
-    const moveToBag = (wishItem) => {
-      store.addToBag(wishItem.item, wishItem.size);
+    const selectedUnit = ref(null);
+
+    watchEffect(() => {
+      // Check if there are wishItems available
+      if (wishItems.value.length > 0) {
+        // Use the size of the first wishItem as the initial selectedUnit
+        selectedUnit.value = wishItems.value[0].size;
+      } else {
+        // If no wishItems, set selectedUnit to null or a default value
+        selectedUnit.value = null; // You can set a default size here if needed
+      }
+    });
+
+    const moveToBag = (wishItem, size) => {
+      if (!!selectedUnit) {
+        store.addToBag(wishItem.item, size);
+      } else {
+        store.addToBag(wishItem.item, wishItem.size);
+      }
       removeFromWishlist(wishItem);
     };
 
@@ -112,6 +131,7 @@ export default {
 
     return {
       sortedWishItems,
+      selectedUnit,
       getDisplayedSize,
       moveToBag,
       removeFromWishlist,
