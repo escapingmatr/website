@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="actions">
-            <div class="remove-from-wishlist" @click="removeFromBag(bagItem)">
+            <div class="remove-from-bag" @click="removeFromBag(bagItem)">
               REMOVE
             </div>
           </div>
@@ -112,50 +112,50 @@ export default {
 <style lang="scss" scoped>
 .shopping-bag {
   display: flex;
+  justify-content: center;
   .bag-items {
     display: flex;
     flex-direction: column;
-    width: 70vw;
-    height: 30vh;
+    width: 70%;
     .bag-item {
-      flex: 0 0 calc(50% - 16px); /* Two items per row with some spacing */
-      margin: 8px;
+      margin: 4px;
       border: 1px solid #ccc;
       display: flex;
+      height: 30vh;
       padding: 8px;
-
       .bag-item-details {
         display: flex;
-        width: 100%;
+        width: calc(100% - 66px);
         .bag-item-photo {
-          flex: 1;
           img {
-            max-width: 100%;
-            height: auto;
+            height: 100%;
+            width: auto;
           }
         }
         .bag-item-info {
-          flex: 2;
-          padding: 0 16px;
+          padding: 0 8px;
           display: flex;
           flex-direction: column;
-        }
+          .bag-item-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+          }
 
-        .bag-item-name {
-          font-size: 1.2rem;
-          font-weight: 500;
-          margin: 0;
-        }
-
-        .bag-item-price {
-          font-size: 1rem;
-          margin-top: 8px;
-          color: #007bff;
+          .bag-item-price {
+            font-size: 1rem;
+            margin-top: 8px;
+            color: #007bff;
+          }
         }
       }
-
       .actions {
-        cursor: pointer;
+        .remove-from-bag {
+          cursor: pointer;
+          &:hover {
+            color: red;
+          }
+        }
         justify-content: center;
         align-items: center;
       }
