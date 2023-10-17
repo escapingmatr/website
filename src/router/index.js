@@ -12,6 +12,7 @@ import Profile from '@/views/Profile.vue';
 import Product from '@/views/Product.vue';
 import Email from '@/views/Email.vue';
 import History from '@/views/History.vue';
+import Checkout from '@/views/Checkout.vue';
 
 const routes = [
   {
@@ -40,6 +41,7 @@ const routes = [
       },
       { path: '/email', name: 'Email Preference', component: Email },
       { path: '/history', name: 'Purchase History', component: History },
+      { path: '/checkout', name: 'Checkout', component: Checkout },
     ],
   },
 ];

@@ -50,6 +50,7 @@
 
 <script>
 import { ref, watchEffect } from 'vue';
+import { useRouter } from 'vue-router';
 import { useStore } from '@/store/composition';
 import { useAuthStore } from '@/store/auth';
 import SizeDropdown from '@/components/widgets/Dropdown/SizeDropdown.vue';
@@ -69,6 +70,7 @@ export default {
   setup() {
     const store = useStore();
     const authStore = useAuthStore();
+    const router = useRouter();
 
     let bagItems = ref([]);
 
@@ -84,6 +86,7 @@ export default {
     const proceedToCheckout = () => {
       // Add your logic to handle proceeding to checkout
       // You can navigate to the checkout page or perform other actions.
+      router.push('/checkout');
     };
 
     const removeFromBag = (bagItem) => {
